@@ -32,7 +32,8 @@ library(shapviz)
 library(ggplot2)
 library(xgboost)
 
-run_shap_analysis <- function(shap_path, raw_path, behavior_label, save_path_prefix = "graphs/") {
+run_shap_analysis <- function(shap_path, raw_path, behavior_label) {
+   save_path_prefix = "graphs/"
    df <- read.csv(shap_path)[, -1]  
    rawdf <- read.csv(raw_path)[, -1]
   
@@ -125,7 +126,7 @@ run_shap_analysis <- function(shap_path, raw_path, behavior_label, save_path_pre
      labs(title = "Sum of SHAP Score by Feature Category",
           subtitle = behavior_label,
           x = "Sum of Mean SHAP Scores", y = "Feature Category") +
-     theme_bw(base_size = 14) + theme(legend.position = "none") %>%
+     theme_bw(base_size = 14) + theme(legend.position = "none")
      ggsave(filename = paste0(save_path_prefix, "shap_lollipop_", behavior_label, ".png"),
             width = 6, height = 4.5)
    }
